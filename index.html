@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Page Title</title>
+		<meta name="viewpoint" content="width-device-width, initial-scale-1">
+
+		<link href="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="panel" id="left-panel">
+				<!-- panel content goes here -->
+				<ul data-role="listview">
+					<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+					<li data-role="list-divider">Select a City</li>
+					<li><a href="#" class="city" data-rel="close">Current Location</a></li>
+					<li><a href="#" class="city" data-rel="close">Chicago</a></li>
+					<li><a href="#" class="city" data-rel="close">Los Angeles</a></li>
+					<li><a href="#" class="city" data-rel="close">Miami</a></li>
+					<li><a href="#" class="city" data-rel="close">New York</a></li>
+					<li><a href="#" class="city" data-rel="close">San Francisco</a></li>
+				</ul>
+			</div><!-- /panel -->
+
+			<div data-role="header" data-position="fixed">
+				<h1>GOOD Weather</h1>
+				<a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Close</a>
+			</div><!-- /header -->
+
+			<div data-role="content" class="content">
+				<h1 id="current_temp" class="icon" data-icon="B">65&#176;F</h1>
+				<p id="current_summary">Partly Cloudy</p>
+				<p id="location">Current Location</p>
+
+			</div><!-- /content -->	
+
+		</div><!-- /page -->	
+	</body>
+</html>
