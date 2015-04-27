@@ -8,6 +8,32 @@
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+		<script type="text/javascript">
+
+			function loadWeather() {
+				var forecastURL = "https://api.forecast.io/forecast/7707489cd06a0d7ef371699810b75b9f/37.8267,-122.423";
+
+				$.ajax({
+					url: forecastURL,
+					jsonpCallback: 'jsonpCallback',
+					contentType: "application/json",
+					dataType: 'jsonp',
+					success: function(json) {
+						console.log(json);
+						$("#current_temp").html(Math.round(json.currently.temperature) + "&#176;F");
+						$("#current_summary").html(json.currently.summary);
+					},
+					error: function(e) {
+						console.log(e.message);
+					}
+				});				
+			}
+
+			$(document).ready(function() {
+				loadWeather();
+			});
+		</script>
 	</head>
 	<body>
 		<div data-role="page">
