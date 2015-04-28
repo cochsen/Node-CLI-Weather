@@ -2,17 +2,44 @@
 <html>
 	<head>
 		<title>Page Title</title>
-		<meta name="viewpoint" content="width-device-width, initial-scale-1">
+		<meta name="viewpoint" content="width-device-width, initial-scale-1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="apple-touch-icon" href="images/icon.png" />
 
 		<link href="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css" />
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 
 		<script type="text/javascript">
 
-			function loadWeather() {
-				var forecastURL = "";
+			var icons = {	
+				"clear-day" 	: "B",
+				"clear-night" 	: "C", 
+				"rain" 			: "R", 
+				"snow"			: "G",
+				"sleet"			: "X",
+				"wind" 			: "S",
+				"fog"			: "N",
+				"cloudy"		: "Y",
+				"partly-cloudy-day"	: "H",
+				"partly-cloudy-night" : "I"
+			};
+
+			var cities = {
+				"chicago" : { coords : { latitude: 41.894554, longitude: -87.624254} },
+				"los angeles" : { coords : { latitude: 34.076009, longitude: -118.376511} },
+				"new york" : { coords: { latitude: 40.657990, longitude: -73.996918 } },
+				"miami" : { coords: { latitude: 25.790237, longitude: -80.135732 } },
+				"san francisco" : { coords: { latitude: 37.785729, longitude: -122.406182 } },
+				"current location" : "" 
+			};
+
+			function loadWeather(cityCoords) {
+				
+				var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
+
+				var forecastURL = "<apiURL>" + latlng;
 
 				$.ajax({
 					url: forecastURL,
@@ -23,6 +50,7 @@
 						console.log(json);
 						$("#current_temp").html(Math.round(json.currently.temperature) + "&#176;F");
 						$("#current_summary").html(json.currently.summary);
+						$("#current_temp").attr("data-icon", icons[json.currently.icon]);
 					},
 					error: function(e) {
 						console.log(e.message);
@@ -30,8 +58,30 @@
 				});				
 			}
 
+			function loadCity(city) {
+				$('#location').html(city);
+
+				if (city.toLowerCase() == "current location") {
+					if ( navigator.geolocation ) {
+						navigator.geolocation.getCurrentPosition(loadWeather, loadDefaultCity);
+					} else {
+						loadDefaultCity();
+					}
+				} else {
+					loadWeather(cities[city.toLowerCase()]);
+				}
+			}
+
+			function loadDefaultCity() {
+				loadCity("New York");
+			}
+
 			$(document).ready(function() {
-				loadWeather();
+				loadCity("Chicago");
+
+				$("a.city").bind("click", function() {
+					loadCity($(this).html());
+				});
 			});
 		</script>
 	</head>
