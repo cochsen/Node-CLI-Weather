@@ -1,0 +1,5 @@
+﻿Good Weather To Do:
+1. Add zip code search
+2. Update weather by geolocation
+3. Add Phonegap config.xml
+4. 5-day forecast screen
