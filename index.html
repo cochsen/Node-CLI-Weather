@@ -9,9 +9,12 @@
 		<link href="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css" />
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="apiurl.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 
 		<script type="text/javascript">
+
+            var apiURL = "https://api.forecast.io/forecast/";
 
 			var icons = {	
 				"clear-day" 	: "B",
@@ -39,7 +42,7 @@
 				
 				var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
 
-				var forecastURL = "<apiURL>" + latlng;
+				var forecastURL = apiURL + apiKey + latlng;
 
 				$.ajax({
 					url: forecastURL,
