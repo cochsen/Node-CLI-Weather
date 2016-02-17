@@ -4,8 +4,6 @@ module.exports = function (location, callback) {
     var units = 'units=imperial';
     // encode URL
     encodeURIComponent(location);
-    if (!location)
-        callback('No location provided');
     console.log('Got weather!');
     var request = require('request');
     var url = apiUrl + location + '&' + units + '&' + appId;

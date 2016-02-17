@@ -19,6 +19,7 @@ if (argv.location) {
     });
 }
 else {
+    console.log("Location was not provided.");
     location(function (location) {
         var city = location.city;
         weather(city, function (currentWeather) {
