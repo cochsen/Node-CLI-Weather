@@ -1,17 +1,18 @@
-module.exports = function (callback) {
+module.exports = function () {
+  return new Promise(function (resolve, reject) {
     var request = require('request');
     var url = 'http://ipinfo.io';
     request({
-        url: url,
-        json: true
+          url: url,
+          json: true
         },
         function (err, res, body) {
         if (err) {
-            callback("Unable to get location.");
+          return reject("Unable to get location.");
         }
         else {
-            //console.log(JSON.stringify(body, null, 4));
-            callback(body);
+          return resolve(body);
         }
+      });
     });
-}
+};

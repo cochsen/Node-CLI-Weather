@@ -14,18 +14,19 @@ var argv = require('yargs')
     .argv;
 
 if (argv.location) {
-    weather(argv.location, function (currentWeather) {
-        console.log(currentWeather);
-    });
+  weather(argv.location).then(function (message) {
+    console.log(message);
+  }).catch(function (error) {
+    console.log(error);
+  });
 }
 else {
     console.log("Location was not provided.");
-    location(function (location) {
-        var city = location.city;
-        weather(city, function (currentWeather) {
-            console.log(currentWeather);
-        });
+    location().then(function (loc) {
+      return weather(loc.city);
+    }).then(function (message) {
+      console.log(message);
+    }).catch(function (error) {
+      console.log(error);
     });
 }
-
-

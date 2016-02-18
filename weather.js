@@ -1,24 +1,22 @@
-module.exports = function (location, callback) {  
+module.exports = function (location) {
+  return new Promise(function (resolve, reject) {
+    var request = require('request');
     var appId = require('./appid.js');
     var apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
     var units = 'units=imperial';
-    // encode URL
-    encodeURIComponent(location);
-    console.log('Got weather!');
-    var request = require('request');
     var url = apiUrl + location + '&' + units + '&' + appId;
     request({
-        url: url, 
-        json: true
-        }, 
+          url: url,
+          json: true
+        },
         function (err, res, body) {
         if (err) {
-            callback("Unable to fetch weather.");
+          return reject("Unable to fetch weather.");
         }
         else {
-            var temp = body.main.temp;
-            var name = body.name;
-            callback("It's " + temp + " in " + name);
+          console.log('Got weather!');
+          return resolve("It's " + body.main.temp + " in " + body.name);
         }
-    });    
-}
+      });
+    });
+};
