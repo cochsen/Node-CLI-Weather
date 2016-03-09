@@ -1,4 +1,3 @@
-## Branches
-
-  * Master: Weather app built with Node.js and Openweathermap.org API
-  * goodweather: Weather app built with jQuery Mobile and Forecast.io
+### Get weather from the command line
+---
+Built with Node.js and Openweathermap.org API
